@@ -5,7 +5,7 @@ from Bio.Seq import Seq
 aminoacidos = "ARNDCEQGHILKMFPSTWYV" # FIXME -sacar a archivo-
 
 # Lectura de la familia
-familia = list(SeqIO.parse("PF02958_full_normalized.fasta", "fasta"))  #FIXME -parametrizar a archivo-
+familia = list(SeqIO.parse("../secuencias/PF02958_full_normalized.fasta", "fasta"))  #FIXME -parametrizar a archivo-
 
 # Largo del alineamiento
 longitud = len(familia[1].seq)
@@ -40,7 +40,7 @@ for proteina in familia:
     proteina.seq = secuenciaRepresentativa
 
 # Handler para la escritura
-handle = open("./PF02958_no_gaps.fasta","w")
+handle = open("../secuencias/PF02958_no_gaps.fasta","w")
 
 # Escritura
 SeqIO.write(familia,handle,"fasta")

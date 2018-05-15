@@ -3,7 +3,7 @@ from random import randint
 print("Contando cantidad de familias...")
 
 total_families = 0
-with open("Pfam-A.hmm.dat", "r", encoding="utf-8") as file:
+with open("../secuencias/Pfam-A.hmm.dat", "r", encoding="utf-8") as file:
     for line in file:
         if "AC" in line.strip():
             total_families = total_families + 1
