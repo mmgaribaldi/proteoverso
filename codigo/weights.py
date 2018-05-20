@@ -70,9 +70,9 @@ for proteina in familia:
             pesoPosicion = 1/(cantidadDistintos*cantidad)
             total = total + pesoPosicion
     totalNormalizado = total/longitud
-    print("El total de la proteina: " + proteina.description  + "es: " + str(total))
+    #print("El total de la proteina: " + proteina.description  + "es: " + str(total))
     print("El total de la proteina: " + proteina.description  + "es: " + str(totalNormalizado) + "(normalizado)")
 
     control = control + totalNormalizado
 
-print(control)
+print("Suma total: " + str(control))
