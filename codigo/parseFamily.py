@@ -5,7 +5,7 @@ from Bio.Seq import Seq
 aminoacidos = "ARNDCEQGHILKMFPSTWYV" # FIXME -sacar a archivo-
 
 # Lectura de la familia
-familia = list(SeqIO.parse("../secuencias/PF02958_full.fasta", "fasta"))  #FIXME -parametrizar a archivo-
+familia = list(SeqIO.parse("../secuencias/PF02958_full.txt", "fasta"))  #FIXME -parametrizar a archivo-
 
 # Largo del alineamiento
 longitud = len(familia[1].seq)
@@ -22,7 +22,7 @@ for proteina in familia:
     for x in range(0, longitud):
         if secuenciaString[x] is not '-':
             if secuenciaString[x] not in aminoacidos:
-                secuenciaString.replace(secuenciaString[x] , 'A')
+                secuenciaString = secuenciaString.replace(secuenciaString[x] , 'A')
 
 
     secuenciaNormalizada = Seq(secuenciaString)
