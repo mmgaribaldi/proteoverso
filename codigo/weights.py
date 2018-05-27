@@ -1,5 +1,5 @@
 from Bio import SeqIO
-from Bio.Seq import Seq
+import math
 
 # Aminoacidos
 aminoacidos = "ARNDCEQGHILKMFPSTWYV" # FIXME -sacar a archivo-
@@ -42,7 +42,7 @@ familia = list(SeqIO.parse("../secuencias/PF02958_no_gaps.fasta", "fasta"))  #FI
 
 # Largo del alineamiento
 longitud = len(familia[1].seq)
-print("Largo del alineamiento: " + str(longitud))
+print("Largo del alineamiento ya procesado: " + str(longitud))
 cantidadProteinas = len(familia)
 
 # Creo la matriz para calcular los pesos
@@ -58,6 +58,7 @@ for proteina in familia:
 
 # Calculo los pesos
 control = 0
+h = 0
 for proteina in familia:
     pesoPosicion = 0
     total = 0
@@ -70,9 +71,14 @@ for proteina in familia:
             pesoPosicion = 1/(cantidadDistintos*cantidad)
             total = total + pesoPosicion
     totalNormalizado = total/longitud
-    #print("El total de la proteina: " + proteina.description  + "es: " + str(total))
-    print("El total de la proteina: " + proteina.description  + "es: " + str(totalNormalizado) + "(normalizado)")
 
+    hParcial = ((-1)*totalNormalizado) * math.log(totalNormalizado)
+    h = h + hParcial
     control = control + totalNormalizado
 
-print("Suma total: " + str(control))
+numeroEfectivo = math.exp(h)
+
+print("Suma total (control, deberia ser 1): " + str(control))
+print("El valor de H es: " + str(h))
+print("El numero total de proteinas de la familia es: " + str(cantidadProteinas))
+print("El numero efectivo de secuencias de esta familia es: " + str(numeroEfectivo))
