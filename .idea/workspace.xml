@@ -5,10 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/codigo/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/codigo/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/codigo/selectFamily.py" beforeDir="false" afterPath="$PROJECT_DIR$/codigo/selectFamily.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/secuencias/PF02958_full.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/secuencias/PF02958_full.txt_no_gaps.fasta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/secuencias/PF11288_full.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/secuencias/PF11288_full.txt_no_gaps.fasta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/secuencias/PF02958_full.fasta_no_gaps.fasta" beforeDir="false" afterPath="$PROJECT_DIR$/secuencias/PF02958_full.fasta_no_gaps.fasta" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,7 +20,7 @@
         <entry file="file://$PROJECT_DIR$/codigo/selectFamily.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
-              <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+              <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -34,8 +31,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/codigo/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="169" selection-start-line="169" selection-end-line="169" />
+            <state relative-caret-position="443">
+              <caret line="208" column="25" selection-start-line="208" selection-start-column="25" selection-end-line="208" selection-end-column="25" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -77,8 +74,8 @@
         <option value="$PROJECT_DIR$/codigo/weights.py" />
         <option value="$USER_HOME$/.virtualenvs/proteoverso/lib/python3.6/site-packages/prody/database/pfam.py" />
         <option value="$PROJECT_DIR$/secuencias/selectFamily.py" />
-        <option value="$PROJECT_DIR$/codigo/main.py" />
         <option value="$PROJECT_DIR$/codigo/selectFamily.py" />
+        <option value="$PROJECT_DIR$/codigo/main.py" />
       </list>
     </option>
   </component>
@@ -279,11 +276,11 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5005952" side_tool="true" weight="0.32919955" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49940476" visible="true" weight="0.25951904" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49940476" weight="0.25951904" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997996" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.41583166" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -298,10 +295,71 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="22" />
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/codigo/main.py</url>
+          <line>210</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="28" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/codigo/selectFamily.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codigo/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2895">
+          <caret line="195" selection-start-line="195" selection-end-line="195" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codigo/selectFamily.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codigo/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2505">
+          <caret line="169" selection-start-line="169" selection-end-line="169" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/codigo/selectFamily.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -352,9 +410,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/secuencias/PF11288_ful.txt_no_gaps.fasta">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/secuencias/PF11288_ful.txt_no_gaps.fasta" />
     <entry file="file://$PROJECT_DIR$/codigo/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2010">
@@ -372,9 +428,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/secuencias/PF11288_ful.txt_no_gaps.fasta">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/secuencias/PF11288_ful.txt_no_gaps.fasta" />
     <entry file="file://$PROJECT_DIR$/codigo/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2175">
@@ -501,9 +555,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/secuencias/PF02958_full.txt_no_gaps.fasta">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/secuencias/PF02958_full.txt_no_gaps.fasta" />
     <entry file="file://$PROJECT_DIR$/codigo/oldFiles/ponderatePositions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
@@ -527,21 +579,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/secuencias/PF00076_full.txt" />
     <entry file="file://$PROJECT_DIR$/secuencias/PF00076_full.txt_no_gaps.fasta" />
-    <entry file="file://$PROJECT_DIR$/secuencias/PF11288_ful.txt_no_gaps.fasta">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/secuencias/PF11288_full.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/secuencias/PF11288_ful.txt_no_gaps.fasta" />
+    <entry file="file://$PROJECT_DIR$/secuencias/PF11288_full.txt" />
     <entry file="file://$PROJECT_DIR$/secuencias/PF11288_full.fasta">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$USER_HOME$/.virtualenvs/proteoverso/lib/python3.6/site-packages/prody/database/pfam.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -557,10 +598,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/secuencias/PF02958_full.fasta_no_gaps.fasta">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/secuencias/PF11288_full.fasta_no_gaps.fasta">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/codigo/selectFamily.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -569,8 +623,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/codigo/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="169" selection-start-line="169" selection-end-line="169" />
+        <state relative-caret-position="443">
+          <caret line="208" column="25" selection-start-line="208" selection-start-column="25" selection-end-line="208" selection-end-column="25" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>

@@ -17,8 +17,8 @@ num_family = randint(0, total_families)
 print(str(num_family))
 
 # Descargo y muevo al directorio de secuencias
-file = fetchPfamMSA('PF02958', compressed=False, format='fasta')
-shutil.move(file, '../secuencias/' + file)
+#file = fetchPfamMSA('PF02958', compressed=False, format='fasta')
+#shutil.move(file, '../secuencias/' + file)
 
-main.calcularPesos('../secuencias/'+file)
-#main.calcularPesos('PF02958_full.fasta')
+#main.calcularPesos('../secuencias/'+file)
+main.calcularPesos('PF02958_full.fasta')

@@ -135,6 +135,9 @@ def calcularPesos(family):
     # Creo la matriz para calcular los pesos
     pesos = [[0 for x in range(longitud)] for y in range(len(aminoacidos)+1)]
 
+    # Creo un array para grabar los pesos
+    pesosSecuencias = [ 0 for x in range(cantidadAlineamientos)]
+
     # Lleno la matriz
     for proteina in familia:
         secuencia = proteina.seq
@@ -149,6 +152,7 @@ def calcularPesos(family):
     # Calculo el numero efectivo de secuencias
     control = 0
     h = 0
+    indice = 0
     for proteina in familia:
         pesoPosicion = 0
         total = 0
@@ -161,6 +165,9 @@ def calcularPesos(family):
                 pesoPosicion = 1/(cantidadDistintos*cantidad)
                 total = total + pesoPosicion
         totalNormalizado = total/longitud
+
+        pesosSecuencias[indice] = totalNormalizado
+        indice = indice + 1
 
         hParcial = totalNormalizado * math.log(totalNormalizado) * -1
         h = h + hParcial
@@ -175,6 +182,30 @@ def calcularPesos(family):
 
     # Calculo el numero efectivo de aminoacidos
     print("Calculando el numero efectivo de aminoacidos...")
-    for x in range(0, longitud):
-        for a in range(0, 20):
-            print("En la posicion " + str(x) + "hay " + str(pesos[a][x]) + "cantidad de " + fromAminoacido(a))
+
+    # Resetep la matriz para recalcular los pesos
+#    alineamiento = [['0' for x in range(longitud)] for y in range(cantidadAlineamientos)]
+#    indice = 0
+#    for proteina in familia:
+#        secuencia = proteina.seq
+#        secuenciaString = str(secuencia)
+#        for x in range(0, longitud):
+#            alineamiento[indice][x] = secuenciaString[x]
+#        indice = indice + 1
+
+    # Vacio la matriz
+    pesos = [[0 for x in range(longitud)] for y in range(len(aminoacidos)+1)]
+
+    # Lleno la matriz con pesos ponderados
+    indice = 0
+    for proteina in familia:
+        secuencia = proteina.seq
+        secuenciaString = str(secuencia)
+        for x in range(0, longitud):
+            if secuenciaString[x] is not '-':
+                pesos[toAminoacido(secuenciaString[x])][x] = pesos[toAminoacido(secuenciaString[x])][x] + pesosSecuencias[indice]
+            else:
+                pesos[20][x] = pesos[20][x] + pesosSecuencias[20] # sacar este hardcodeo de 20
+        indice = indice + 1
+
+    print(pesos)
