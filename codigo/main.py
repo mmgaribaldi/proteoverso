@@ -208,6 +208,8 @@ def calcularPesos(family):
                 pesos[20][x] = pesos[20][x] + (pesosSecuencias[indice]*cantidadAlineamientos) # sacar este hardcodeo de 20
         indice = indice + 1
 
+    posibles = 1
+
     for columna in range(0, longitud):
         hj=0
         for fila in range(0, 21):
@@ -217,3 +219,17 @@ def calcularPesos(family):
                 hj = hj + (-1)*pj*math.log(pj)
         aaj = math.exp(hj)
         print("En la posicion " + str(columna) + " hay " + str(aaj) + " aminoacidos representativos")
+
+        posibles = posibles * aaj
+
+    print("Aminoacidos positbles: " + str(posibles))
+    print("Secuencias posibles para este alineamiento: ")
+    secuenciasPosibles = math.log(math.pow(21,100),10)
+    secuenciasPosibles2 = math.log(math.pow(21,100),10)
+    secuenciasPosibles3 = math.log(math.pow(21,83),10)
+    total = secuenciasPosibles*secuenciasPosibles2*secuenciasPosibles3
+
+    print(str(secuenciasPosibles))
+    print(str(secuenciasPosibles2))
+    print(str(secuenciasPosibles3))
+    print(str(total))
