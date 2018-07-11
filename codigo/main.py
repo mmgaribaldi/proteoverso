@@ -63,6 +63,17 @@ def aminoacidosDistintos(pesos, posicion, aminoacidos):
             cantidad = cantidad + 1
     return cantidad
 
+def calcularExponentes(longitud,factor):
+    import numpy as np
+    exponentes = np.zeros(int(round(longitud/factor)))
+    i = 0
+    while (longitud >= factor):
+        longitud = longitud - factor
+        exponentes[i] = factor
+        i = i + 1
+    exponentes[i] = longitud
+    return exponentes
+
 def calcularPesos(family):
 
     # Aminoacidos
@@ -151,13 +162,6 @@ def calcularPesos(family):
                 pesos[20][x] = pesos[20][x] + 1 # sacar este hardcodeo de 20
     print("Matriz completa... Comprobando suma de columnas...")
 
-#    print("Controlando que suma de columnas de frecuencias de" + str(cantidadAlineamientos))
-
-#    for columna in range(0, longitud):
-#        col=0
-#        for fila in range(0, 21):
-#            print("Posicion " + str(columna) + " " + " el aminoacido: " + fromAminoacido(fila) + " " + str(pesos[fila][columna]))
-
     # Calculo el numero efectivo de secuencias
     control = 0
     h = 0
@@ -213,7 +217,6 @@ def calcularPesos(family):
     for columna in range(0, longitud):
         hj=0
         for fila in range(0, 21):
-#            print("Para la posicion " + str(columna) + " el aminoacido " + fromAminoacido(fila) + " pesa " + str(pesos[fila][columna]))
             pj = pesos[fila][columna]/cantidadAlineamientos
             if pj != 0:
                 hj = hj + (-1)*pj*math.log(pj)
@@ -223,13 +226,10 @@ def calcularPesos(family):
         posibles = posibles * aaj
 
     print("Aminoacidos positbles: " + str(posibles))
-    print("Secuencias posibles para este alineamiento: ")
-    secuenciasPosibles = math.log(math.pow(21,100),10)
-    secuenciasPosibles2 = math.log(math.pow(21,100),10)
-    secuenciasPosibles3 = math.log(math.pow(21,83),10)
-    total = secuenciasPosibles*secuenciasPosibles2*secuenciasPosibles3
 
-    print(str(secuenciasPosibles))
-    print(str(secuenciasPosibles2))
-    print(str(secuenciasPosibles3))
-    print(str(total))
+    exponentes = calcularExponentes(longitud,100)
+    secuenciasPosibles = 1
+    for exponente in exponentes:
+        secuenciasPosibles = secuenciasPosibles*math.log(math.pow(21,exponente),10)
+
+    print("Secuencias posibles para este alineamiento(resultado expresado logaritmicamente en base 10): " + str(secuenciasPosibles))

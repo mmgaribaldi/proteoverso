@@ -38,4 +38,8 @@ Thumbs.db
 
 .fasta
 *.fasta
+.xml
+*.xml
+.pyc
+*.pyc
 
