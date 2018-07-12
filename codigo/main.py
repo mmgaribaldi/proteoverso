@@ -86,7 +86,7 @@ def calcularPesos(family):
     longitud = len(familia[1].seq)
     print("Largo del alineamiento: " + str(longitud))
 
-    print("Normalizando secuencia...")
+    #print("Normalizando secuencia...")
     for proteina in familia:
         secuencia = proteina.seq
         secuenciaString = str(secuencia)
@@ -110,7 +110,7 @@ def calcularPesos(family):
     import numpy as np
     cantidadGaps = np.zeros(longitud)
 
-    print("Contando gaps por posicion...")
+    #print("Contando gaps por posicion...")
     for proteina in familia:
         secuencia = proteina.seq
         secuenciaString = str(secuencia)
@@ -151,7 +151,7 @@ def calcularPesos(family):
     pesosSecuencias = [ 0 for x in range(cantidadAlineamientos)]
 
     # Lleno la matriz
-    print("Llenando la matriz con fecuencias aminoacidicas...")
+    #print("Llenando la matriz con fecuencias aminoacidicas...")
     for proteina in familia:
         secuencia = proteina.seq
         secuenciaString = str(secuencia)
@@ -160,7 +160,7 @@ def calcularPesos(family):
                 pesos[toAminoacido(secuenciaString[x])][x] = pesos[toAminoacido(secuenciaString[x])][x] + 1
             else:
                 pesos[20][x] = pesos[20][x] + 1 # sacar este hardcodeo de 20
-    print("Matriz completa... Comprobando suma de columnas...")
+    #print("Matriz completa... Comprobando suma de columnas...")
 
     # Calculo el numero efectivo de secuencias
     control = 0
@@ -188,13 +188,12 @@ def calcularPesos(family):
 
     numeroEfectivo = math.exp(h)
 
-    print("Suma total (control, deberia ser 1): " + str(control))
-    print("El valor de H es: " + str(h))
+    #print("Suma total (control, deberia ser 1): " + str(control))
+    #print("El valor de H es: " + str(h))
     print("El numero total de proteinas de la familia es: " + str(cantidadProteinas))
     print("El numero efectivo de secuencias de esta familia es: " + str(int(numeroEfectivo)))
 
-    # Calculo el numero efectivo de aminoacidos
-    print("Calculando el numero efectivo de aminoacidos...")
+    ## Calculo el numero efectivo de aminoacidos
 
     # Vacio la matriz
     pesos = [[0 for x in range(longitud)] for y in range(len(aminoacidos)+1)]
@@ -221,7 +220,7 @@ def calcularPesos(family):
             if pj != 0:
                 hj = hj + (-1)*pj*math.log(pj)
         aaj = math.exp(hj)
-        print("En la posicion " + str(columna) + " hay " + str(aaj) + " aminoacidos representativos")
+        #print("En la posicion " + str(columna) + " hay " + str(aaj) + " aminoacidos representativos")
 
         posibles = posibles * aaj
 
@@ -230,6 +229,6 @@ def calcularPesos(family):
     exponentes = calcularExponentes(longitud,100)
     secuenciasPosibles = 1
     for exponente in exponentes:
-        secuenciasPosibles = secuenciasPosibles*math.log(math.pow(21,exponente),10)
+        secuenciasPosibles = secuenciasPosibles+math.log(math.pow(21,exponente),10)
 
     print("Secuencias posibles para este alineamiento(resultado expresado logaritmicamente en base 10): " + str(secuenciasPosibles))

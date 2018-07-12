@@ -2,7 +2,7 @@ import shutil
 from prody import *
 from matplotlib.pylab import *
 import main
-print("Contando cantidad de familias...")
+#print("Contando cantidad de familias...")
 
 total_families = 0
 with open("../secuencias/Pfam-A.hmm.dat", "r", encoding="utf-8") as file:
@@ -12,13 +12,23 @@ with open("../secuencias/Pfam-A.hmm.dat", "r", encoding="utf-8") as file:
 
 print("Cantidad total de familias del archivo HMM: " + str(total_families))
 
-print("Seleccionando una familia al azar... ")
-num_family = randint(0, total_families)
-print(str(num_family))
+for i in range(0,9):
+    num_family = randint(0, total_families)
 
-# Descargo y muevo al directorio de secuencias
-#file = fetchPfamMSA('PF02958', compressed=False, format='fasta')
-#shutil.move(file, '../secuencias/' + file)
+    if num_family<10:
+        id="PF0000"+str(num_family)
+    if num_family<100:
+        id="PF000"+str(num_family)
+    if num_family<1000:
+        id="PF00"+str(num_family)
+    if num_family<10000:
+        id="PF0"+str(num_family)
+    else:
+        id="PF"+str(num_family)
 
-#main.calcularPesos('../secuencias/'+file)
-main.calcularPesos('PF02958_full.fasta')
+    # Descargo y muevo al directorio de secuencias
+    file = fetchPfamMSA(id, compressed=False, format='fasta')
+    shutil.move(file, '../secuencias/' + file)
+
+    main.calcularPesos('../secuencias/'+file)
+    #main.calcularPesos('PF02958_full.fasta')
