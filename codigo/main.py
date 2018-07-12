@@ -65,14 +65,19 @@ def aminoacidosDistintos(pesos, posicion, aminoacidos):
 
 def calcularExponentes(longitud,factor):
     import numpy as np
-    exponentes = np.zeros(int(round(longitud/factor)))
-    i = 0
-    while (longitud >= factor):
-        longitud = longitud - factor
-        exponentes[i] = factor
-        i = i + 1
-    exponentes[i] = longitud
-    return exponentes
+    if longitud > 10:
+        exponentes = np.zeros(int(round(longitud/factor)))
+        i = 0
+        while (longitud >= factor):
+            longitud = longitud - factor
+            exponentes[i] = factor
+            i = i + 1
+        exponentes[i] = longitud
+        return exponentes
+    else:
+        exponentes=0
+        return exponentes
+
 
 def calcularPesos(family):
 
@@ -226,7 +231,7 @@ def calcularPesos(family):
 
     print("Aminoacidos positbles: " + str(posibles))
 
-    exponentes = calcularExponentes(longitud,100)
+    exponentes = calcularExponentes(longitud,10)
     secuenciasPosibles = 1
     for exponente in exponentes:
         secuenciasPosibles = secuenciasPosibles+math.log(math.pow(21,exponente),10)

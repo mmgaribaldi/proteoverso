@@ -1,4 +1,5 @@
 import shutil
+import os
 from prody import *
 from matplotlib.pylab import *
 import main
@@ -28,7 +29,11 @@ for i in range(0,9):
 
     # Descargo y muevo al directorio de secuencias
     file = fetchPfamMSA(id, compressed=False, format='fasta')
-    shutil.move(file, '../secuencias/' + file)
+    print(file)
+    while os.stat(file).st_size == 0:
+        print("descarga fallida, reintentando...")
+        file = fetchPfamMSA(id, compressed=False, format='fasta')
 
+
+    shutil.move(file, '../secuencias/' + file)
     main.calcularPesos('../secuencias/'+file)
-    #main.calcularPesos('PF02958_full.fasta')
