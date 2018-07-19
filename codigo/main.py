@@ -66,9 +66,9 @@ def aminoacidosDistintos(pesos, posicion, aminoacidos):
 def calcularExponentes(longitud,factor):
     import numpy as np
     if longitud > 10:
-        exponentes = np.zeros(int(round(longitud/factor)))
+        exponentes = np.zeros(int(math.ceil(longitud/factor)))
         i = 0
-        while (longitud >= factor):
+        while (longitud > factor):
             longitud = longitud - factor
             exponentes[i] = factor
             i = i + 1
@@ -87,9 +87,14 @@ def calcularPesos(family):
     # Lectura de la familia
     familia = list(SeqIO.parse("../secuencias/" + family, "fasta"))
 
+    # Abro el archivo para resultados
+    results = open("../secuencias/"+family+"_results.txt","w")
+
     # Largo del alineamiento
-    longitud = len(familia[1].seq)
+    longitud = len(familia[0].seq)
     print("Largo del alineamiento: " + str(longitud))
+    results.write("Largo del alineamiento: " + str(longitud)+"\n")
+
 
     #print("Normalizando secuencia...")
     for proteina in familia:
@@ -144,9 +149,11 @@ def calcularPesos(family):
     SeqIO.write(familia,handle,"fasta")
 
 
+
     # Largo del alineamiento procesado
     longitud = len(familia[1].seq)
     print("Largo del alineamiento ya procesado: " + str(longitud))
+    results.write("Largo del alineamiento ya procesado: " + str(longitud)+ "\n")
     cantidadProteinas = len(familia)
 
     # Creo la matriz para calcular los pesos
@@ -197,6 +204,8 @@ def calcularPesos(family):
     #print("El valor de H es: " + str(h))
     print("El numero total de proteinas de la familia es: " + str(cantidadProteinas))
     print("El numero efectivo de secuencias de esta familia es: " + str(int(numeroEfectivo)))
+    results.write("El numero total de proteinas de la familia es: " + str(cantidadProteinas)+ "\n")
+    results.write("El numero efectivo de secuencias de esta familia es: " + str(int(numeroEfectivo))+ "\n")
 
     ## Calculo el numero efectivo de aminoacidos
 
@@ -230,6 +239,7 @@ def calcularPesos(family):
         posibles = posibles * aaj
 
     print("Aminoacidos positbles: " + str(posibles))
+    results.write("Aminoacidos positbles: " + str(posibles)+ "\n")
 
     exponentes = calcularExponentes(longitud,10)
     secuenciasPosibles = 1
@@ -237,3 +247,7 @@ def calcularPesos(family):
         secuenciasPosibles = secuenciasPosibles+math.log(math.pow(21,exponente),10)
 
     print("Secuencias posibles para este alineamiento(resultado expresado logaritmicamente en base 10): " + str(secuenciasPosibles))
+    results.write("Secuencias posibles para este alineamiento(resultado expresado logaritmicamente en base 10): " + str(secuenciasPosibles)+ "\n")
+
+    # Cierro el archivo con resultados
+    results.close()
