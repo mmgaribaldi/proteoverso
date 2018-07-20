@@ -239,7 +239,7 @@ def calcularPesos(family):
         posibles = posibles * aaj
 
     print("Aminoacidos positbles: " + str(posibles))
-    results.write("Aminoacidos positbles: " + str(posibles)+ "\n")
+    results.write("Aminoacidos posibles: " + str(posibles)+ "\n")
 
     exponentes = calcularExponentes(longitud,10)
     secuenciasPosibles = 1

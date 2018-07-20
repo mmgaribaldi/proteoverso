@@ -4,6 +4,7 @@ import os
 
 from prody import *
 from matplotlib.pylab import *
+from urllib.error import HTTPError
 
 max_retry = 5
 total_families = 0
@@ -14,7 +15,7 @@ with open("../secuencias/Pfam-A.hmm.dat", "r", encoding="utf-8") as file:
 
 print("Cantidad total de familias del archivo HMM: " + str(total_families))
 
-for i in range(2,total_families):
+for i in range(106,total_families):
 
     if i<10:
         id="PF0000"+str(i)
@@ -31,13 +32,21 @@ for i in range(2,total_families):
                     id="PF"+str(i)
 
     # Descargo y muevo al directorio de secuencias
-    file = fetchPfamMSA(id, compressed=False, format='fasta', timeout=600)
-    print(file)
-    tryed=0
-    while os.stat(file).st_size == 0 and tryed < max_retry:
-        print("descarga fallida, reintentando...")
-        file = fetchPfamMSA(id, compressed=False, format='fasta')
-        tryed = tryed+1
-
-    shutil.move(file, '../secuencias/' + file)
-    main.calcularPesos('../secuencias/'+file)
+    try:
+        file = fetchPfamMSA(id, compressed=False, format='fasta', timeout=2)
+        print(file)
+        tryed=0
+        while os.stat(file).st_size == 0 and tryed < max_retry:
+            print("descarga fallida, reintentando...")
+            try:
+                file = fetchPfamMSA(id, compressed=False, format='fasta')
+                tryed = tryed+1
+            except ConnectionError:
+                print("Error en el server...")
+        shutil.move(file, '../secuencias/' + file)
+    except HTTPError as error:
+        print(error.getcode())
+    try:
+        main.calcularPesos('../secuencias/'+file)
+    except IndexError:
+        print("No se puede descargar")
