@@ -33,7 +33,7 @@ for i in range(106,total_families):
 
     # Descargo y muevo al directorio de secuencias
     try:
-        file = fetchPfamMSA(id, compressed=False, format='fasta', timeout=2)
+        file = fetchPfamMSA(id, compressed=False, format='fasta', timeout=30)
         print(file)
         tryed=0
         while os.stat(file).st_size == 0 and tryed < max_retry:
@@ -44,9 +44,9 @@ for i in range(106,total_families):
             except ConnectionError:
                 print("Error en el server...")
         shutil.move(file, '../secuencias/' + file)
-    except HTTPError as error:
-        print(error.getcode())
+    except Exception as error:
+        print ("Aca tenes la exception gato") #.format(error.getcode()))
     try:
         main.calcularPesos('../secuencias/'+file)
-    except IndexError:
+    except Exception as error:
         print("No se puede descargar")
