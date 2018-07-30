@@ -75,7 +75,7 @@ def calcularExponentes(longitud,factor):
         exponentes[i] = longitud
         return exponentes
     else:
-        exponentes=0
+        exponentes=np.zeros(1)
         return exponentes
 
 
@@ -151,7 +151,7 @@ def calcularPesos(family):
 
 
     # Largo del alineamiento procesado
-    longitud = len(familia[1].seq)
+    longitud = len(familia[0].seq)
     print("Largo del alineamiento ya procesado: " + str(longitud))
     results.write("Largo del alineamiento ya procesado: " + str(longitud)+ "\n")
     cantidadProteinas = len(familia)
