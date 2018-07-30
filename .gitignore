@@ -42,4 +42,7 @@ Thumbs.db
 *.xml
 .pyc
 *.pyc
-
+*.txt
+.txt
+.idea/
+venv/
