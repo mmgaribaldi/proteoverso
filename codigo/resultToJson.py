@@ -1,7 +1,8 @@
 import sys
+import json
 
-# Handler para la escritura
-handle = open(str(sys.argv[1])+"_full.fasta_results.txt","r")
+# Handler para la lectura
+handle = open(str(sys.argv[1]),"r")
 
 i=0
 for line in handle:
@@ -21,16 +22,18 @@ for line in handle:
         secuenciasp=st.rstrip()
     i = i+1
 
-released = {
-    "id" : str(sys.argv[1]),
-    "largo" : largo,
-    "largo procesado" : largop,
-    "secuencias" : secuencias,
-    "secuencias efectivas" : secuenciase,
-    "aminoacidos posibles" : aminoacidos,
-    "secuencias posibles" : secuenciasp
-    }
+with open(str(str(sys.argv[1]))+'result.json', 'w') as fp:
 
+	released = {
+	    "id" : str(sys.argv[1]),
+	    "largo" : largo,
+	    "largo procesado" : largop,
+	    "secuencias" : secuencias,
+	    "secuencias efectivas" : secuenciase,
+	    "aminoacidos posibles" : aminoacidos,
+	    "secuencias posibles" : secuenciasp
+	    }
+	json.dump(released, fp)
 
-print(released);
+#print(released);
 handle.close();
