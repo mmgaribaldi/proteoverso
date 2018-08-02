@@ -23,13 +23,10 @@ for i in flias:
                 else:
                     id="PF"+str(i)
 
-    with open('../../../Downloads/PFI/' + id + '_full.fasta_results.txtresult.json') as f:
+    with open('../resultados/' + id + '_full.fasta_results.txtresult.json') as f:
         data = json.load(f)
 
-    pprint(data["aminoacidos posibles"])
 
     f=float(data["aminoacidos posibles"])
-    print(f)
     f=math.log(f,10)
 
-    print(f)
