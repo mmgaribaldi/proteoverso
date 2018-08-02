@@ -236,7 +236,7 @@ def calcularPesos(family):
         aaj = math.exp(hj)
         #print("En la posicion " + str(columna) + " hay " + str(aaj) + " aminoacidos representativos")
 
-        posibles = posibles * aaj
+        posibles = posibles + math.log(aaj,10)
 
     print("Aminoacidos positbles: " + str(posibles))
     results.write("Aminoacidos posibles: " + str(posibles)+ "\n")
