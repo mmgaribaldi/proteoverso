@@ -23,7 +23,7 @@ procesados.close()
 
 # Descargo y muevo al directorio de secuencias
 try:
-    file = fetchPfamMSA("PF00351", compressed=False, format='fasta', timeout=30)
+    file = fetchPfamMSA("PF00529", compressed=False, format='fasta', timeout=30)
     print(file)
     tryed=0
     while os.stat(file).st_size == 0 and tryed < max_retry:

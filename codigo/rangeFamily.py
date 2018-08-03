@@ -31,7 +31,7 @@ for i in flias:
 
         # Descargo y muevo al directorio de secuencias
         try:
-            file = fetchPfamMSA(id, compressed=False, format='fasta', timeout=10)
+            file = fetchPfamMSA(id, compressed=False, format='fasta', timeout=30)
             print(file)
             shutil.move(file, '../secuencias/' + file)
             main.calcularPesos('../secuencias/' + file)
