@@ -1,5 +1,5 @@
 #!/bin/bash
-FILES=~/Work/temp/*.txt
+FILES=../resultados/*.txt
 for f in $FILES
 do
   echo "Processing $f file..."
