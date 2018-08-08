@@ -22,15 +22,13 @@ for line in handle:
         secuenciase=st.rstrip()
     if i == 4:
         aminoacidos=st.rstrip()
-        aa=float(aminoacidos)
-        aa=math.log(aa,10)
     if i == 5:
         secuenciasp=st.rstrip()
     i = i+1
 
 with open(str(str(sys.argv[1]))+'.csv', 'w') as fp:
 
-    fp.write(idd + "|" + largo + "|" + largop+ "|" + secuencias+ "|" + secuenciase + "|" +str(aa) + "|" + secuenciasp)
+    fp.write(idd + "|" + largo + "|" + largop+ "|" + secuencias+ "|" + secuenciase + "|" + aminoacidos + "|" + secuenciasp)
 
 
 #print(released);
