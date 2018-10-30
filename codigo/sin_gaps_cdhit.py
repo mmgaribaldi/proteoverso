@@ -23,7 +23,6 @@ procesados.close()
 for i, id in enumerate(flias):
     try:
         file = fetchPfamMSA(id, compressed=False, format='fasta', timeout=300, gaps=None)
-        print(file)
         shutil.move(file, '../secuencias/' + file)
     except Exception as error:
         print ("Aca tenes la exception gato")

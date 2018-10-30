@@ -10,7 +10,7 @@ max_retry = 1
 
 # Descargo y muevo al directorio de secuencias
 try:
-    file = fetchPfamMSA("PF05694", compressed=False, format='fasta', timeout=300)
+    file = fetchPfamMSA("PF12216", compressed=False, format='fasta', timeout=300)
     print(file)
     tryed=0
     while os.stat(file).st_size == 0 and tryed < max_retry:
