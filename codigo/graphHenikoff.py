@@ -1,9 +1,12 @@
 import json
+import numpy as np
+from numpy import array
 
 # Leo las familias
 procesados = open("../secuencias/henikoff.txt", "r")
 flias = procesados.readlines()
 procesados.close()
+henikoff = []
 
 for familia in flias:
 
@@ -13,4 +16,13 @@ for familia in flias:
     with open(familia, 'r') as f:
         array = json.load(f)
 
-    print (array)
+        normalizado = int(array['secuencias efectivas'])/int(array['secuencias'])
+        henikoff.append(normalizado)
+
+np.array(henikoff)
+
+promedio=np.mean(henikoff)
+desvio=np.std(henikoff)
+
+print(promedio)
+print(desvio)
