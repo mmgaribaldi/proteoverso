@@ -194,7 +194,8 @@ def calcularPesos(family):
         pesosSecuencias[indice] = totalNormalizado
         indice = indice + 1
 
-        hParcial = totalNormalizado * math.log(totalNormalizado) * -1
+        if totalNormalizado > 0:
+            hParcial = totalNormalizado * math.log(totalNormalizado) * -1
         h = h + hParcial
         control = control + totalNormalizado
 
