@@ -134,7 +134,7 @@ def calcularPesos(family):
         secuenciaString = str(secuencia)
         secuenciaLista = list(secuenciaString)
         for j in range(0,longitud):
-            if ( (cantidadGaps[j]/cantidadAlineamientos) > 0.5 ): #FIXME -sacar como variable el porcentaje-
+            if ( (cantidadGaps[j]/cantidadAlineamientos) > 0.55 ): #FIXME -sacar como variable el porcentaje-
                 secuenciaLista[j]='0'
         secuenciaString = "".join(secuenciaLista)
         secuenciaString = secuenciaString.replace('0','')

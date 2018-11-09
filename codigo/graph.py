@@ -61,8 +61,8 @@ print(promedio)
 print(desviacion)
 
 plt.title('Familias: ')
-plt.plot([x[0],x[1],x[2],x[3],x[4],x[11],x[5],x[6],x[7],x[8],x[9],x[10]], [promedio[0],promedio[1],promedio[2],promedio[3],promedio[4],promedio[5],promedio[6],promedio[7],promedio[8],promedio[9],promedio[10],promedio[11]])
-plt.plot([x[0],x[1],x[2],x[3],x[4],x[11],x[5],x[6],x[7],x[8],x[9],x[10]], [desviacion[0],desviacion[1],desviacion[2],desviacion[3],desviacion[4],desviacion[5],desviacion[6],desviacion[7],desviacion[8],desviacion[9],desviacion[10],desviacion[11]])
+plt.plot([x[0],x[1],x[2],x[3],x[4],x[11],x[5],x[6],x[7],x[8],x[9],x[10],x[12]], [promedio[0],promedio[1],promedio[2],promedio[3],promedio[4],promedio[5],promedio[6],promedio[7],promedio[8],promedio[9],promedio[10],promedio[11],promedio[12]])
+plt.plot([x[0],x[1],x[2],x[3],x[4],x[11],x[5],x[6],x[7],x[8],x[9],x[10],x[12]], [desviacion[0],desviacion[1],desviacion[2],desviacion[3],desviacion[4],desviacion[5],desviacion[6],desviacion[7],desviacion[8],desviacion[9],desviacion[10],desviacion[11],desviacion[12]])
 
 plt.xlabel('Valores de corte')
 plt.ylabel('Promedios de clusters normalizados')
