@@ -43,9 +43,10 @@ for j, elem in enumerate(flias):
 
 print(ejeYb)
 
-plt.title('Cd-hit vs Henikoff: ')
-plt.scatter(ejeX,ejeYa)
-plt.scatter(ejeX,ejeYb)
-plt.xlabel('Log(cd-hit con clusters al 95%)')
-plt.ylabel('Log(Secuencias efectivas Henikoff')
+plt.title('Log de secuencias vs Log Henikoff y Log CD-HIT: ')
+plt.scatter(ejeX,ejeYa,label="CD-HIT")
+plt.scatter(ejeX,ejeYb,label="Henikoff")
+plt.xlabel('Log(secuencias)')
+plt.ylabel('Log(Secuencias efectivas Henikoff & Log CD-HIT')
+plt.legend()
 plt.show()
