@@ -21,8 +21,6 @@ for j, elem in enumerate(flias):
                 #introw = float(row[3])
                 ejeYa[j] = introw
 
-print(ejeYa)
-
 # Leo los resultados a graficar
 procesadosHeni = open("../resultados/agraficar-heni.text", "r")
 flias = procesadosHeni.readlines()
@@ -41,12 +39,14 @@ for j, elem in enumerate(flias):
             ejeX[j] = introwX
             ejeYb[j] = introw
 
-print(ejeYb)
+for k in range(0, len(flias)):
+    if ejeX[k]<ejeYa[k] or ejeX[k]<ejeYb[k]:
+        print(k)
 
-plt.title('Log de secuencias vs Log Henikoff y Log CD-HIT: ')
-plt.scatter(ejeX,ejeYa,label="CD-HIT")
-plt.scatter(ejeX,ejeYb,label="Henikoff")
-plt.xlabel('Log(secuencias)')
-plt.ylabel('Log(Secuencias efectivas Henikoff & Log CD-HIT')
-plt.legend()
-plt.show()
+# plt.title('Log de secuencias vs Log Henikoff y Log CD-HIT: ')
+# plt.scatter(ejeX,ejeYa,label="CD-HIT")
+# plt.scatter(ejeX,ejeYb,label="Henikoff")
+# plt.xlabel('Log(secuencias)')
+# plt.ylabel('Log(Secuencias efectivas Henikoff & Log CD-HIT')
+# plt.legend()
+# plt.show()
