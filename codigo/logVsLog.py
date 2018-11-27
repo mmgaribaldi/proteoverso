@@ -38,6 +38,8 @@ for j, elem in enumerate(flias):
             introwX=math.log(float(row[3]),10)
             ejeX[j] = introwX
             ejeYb[j] = introw
+            if j==13667:
+                print(j)
 
 for k in range(0, len(flias)):
     if ejeX[k]<ejeYa[k] or ejeX[k]<ejeYb[k]:
