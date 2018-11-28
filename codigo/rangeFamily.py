@@ -1,10 +1,8 @@
 import shutil
 import main
-import os
+import zipfile
 
 from prody import *
-from matplotlib.pylab import *
-from urllib.error import HTTPError
 
 max_retry = 1
 
@@ -29,12 +27,14 @@ for i in flias:
                 else:
                     id="PF"+str(i)
 
-        # Descargo y muevo al directorio de secuencias
-        try:
-            file = fetchPfamMSA(id, compressed=False, format='fasta', timeout=300)
-            print(file)
-            shutil.move(file, '../secuencias/' + file)
-            main.calcularPesos('../secuencias/' + file)
-        except Exception as error:
-            print ("Aca tenes la exception gato") #.format(error.getcode()))
+# Descargo y muevo al directorio de secuencias
+#try:
+file = fetchPfamMSA(id, compressed=True, format='fasta', timeout=300)
+print(file)
+with zipfile.ZipFile(file, 'r') as zip_ref:
+    zip_ref.extractall(".")
+shutil.move(file, '../secuencias/' + file)
+main.calcularPesos('../secuencias/' + file)
+#except Exception as error:
+#    print ("Aca tenes la exception gato") #.format(error.getcode()))
 
