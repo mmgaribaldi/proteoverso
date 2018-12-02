@@ -1,6 +1,6 @@
 import shutil
 import main
-import zipfile
+import os
 
 from prody import *
 
@@ -31,8 +31,10 @@ for i in flias:
 #try:
 file = fetchPfamMSA(id, compressed=True, format='fasta', timeout=300)
 print(file)
-with zipfile.ZipFile(file, 'r') as zip_ref:
-    zip_ref.extractall(".")
+command="gzip -d " + file
+os.system(command)
+file = file[:-3]
+
 shutil.move(file, '../secuencias/' + file)
 main.calcularPesos('../secuencias/' + file)
 #except Exception as error:

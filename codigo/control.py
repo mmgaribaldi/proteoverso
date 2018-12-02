@@ -11,13 +11,18 @@ from urllib.error import HTTPError
 max_retry = 1
 
 # Leo los que ya procese
-procesados = open("../secuencias/todos.txt", "r")
+procesados = open("../secuencias/todos.txt.dat", "r")
 flias = procesados.readlines()
 procesados.close()
 
 for id in flias:
     try:
-        file = fetchPfamMSA(id.rstrip(), compressed=False, format='fasta', timeout=300)
+        file = fetchPfamMSA(id.rstrip(), compressed=True, format='fasta', timeout=300)
+
+        command = "gzip -d " + file
+        os.system(command)
+        file = file[:-3]
+
         shutil.move(file, '../control/' + file)
 
         # Lectura de la familia
@@ -31,6 +36,8 @@ for id in flias:
 
         if longitud == longitudHeni:
             print("Familia " + id.rstrip() + " OK")
+        else:
+            print(id.rstrip() + " NO OK")
 
     except Exception as error:
         print ("Aca tenes la exception gato") #.format(error.getcode()))
