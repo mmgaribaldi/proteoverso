@@ -21,38 +21,30 @@ flias = procesados.readlines()
 flias = list(map(int, flias))
 procesados.close()
 
-for i in range(1,total_families):
+for i in range(2,total_families):
     if i in flias:
         print("Familia" + str(i) +" ya procesada!")
     else:
-        if i<10:
-            id="PF0000"+str(i)
-        else:
-            if i<100:
-                id="PF000"+str(i)
-            else:
-                if i<1000:
-                    id="PF00"+str(i)
-                else:
-                    if i<10000:
-                        id="PF0"+str(i)
-                    else:
-                        id="PF"+str(i)
+
+        id = 'PF' + '%0*d' % (5, i)
 
         # Descargo y muevo al directorio de secuencias
         try:
-            file = fetchPfamMSA(id, compressed=False, format='fasta', timeout=10)
+            file = fetchPfamMSA(id, compressed=True, format='fasta', timeout=300)
+
+            shutil.copy(file, '../control/' + file)
+
+            command = "gzip -d " + file
+            os.system(command)
+            file = file[:-3]
+
             print(file)
-#            tryed=0
-#            while os.stat(file).st_size == 0 and tryed < max_retry:
-#                print("descarga fallida, reintentando...")
-#                try:
-#                    file = fetchPfamMSA(id, compressed=False, format='fasta')
-#                    tryed = tryed+1
-#                except ConnectionError:
-#                    print("Error en el server...")
             shutil.move(file, '../secuencias/' + file)
             main.calcularPesos('../secuencias/'+file)
+
+            command = "echo " + id[2:10] + " >> ../secuencias/procesadas.txt"
+            os.system(command)
+
         except Exception as error:
             print ("Aca tenes la exception gato") #.format(error.getcode()))
 
