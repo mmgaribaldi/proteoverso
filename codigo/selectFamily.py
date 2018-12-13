@@ -47,4 +47,3 @@ for i in range(2,total_families):
 
         except Exception as error:
             print ("Aca tenes la exception gato") #.format(error.getcode()))
-
