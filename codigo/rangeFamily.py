@@ -21,18 +21,26 @@ flias = procesados.readlines()
 flias = list(map(int, flias))
 procesados.close()
 
+# Leo los que ya descargue
+descargadas = open("../secuencias/descargadas.dat", "r")
+flias_d = descargadas.readlines()
+flias_d = list(map(int, flias_d))
+descargadas.close()
+
 for i in range(2,total_families):
     if i in flias:
-        id = 'PF' + '%0*d' % (5, i)
+        if i not in flias_d:
+            id = 'PF' + '%0*d' % (5, i)
 
-        # Descargo y muevo al directorio de secuencias
-        try:
-            file = fetchPfamMSA(id, compressed=True, format='fasta', timeout=300)
+            # Descargo y muevo al directorio de secuencias
+            try:
 
-            shutil.move(file, '../control/' + file)
+                file = fetchPfamMSA(id, compressed=True, format='fasta', timeout=300)
 
-        except Exception as error:
-            print ("Aca tenes la exception gato") #.format(error.getcode()))
+                shutil.move(file, '../control/' + file)
+
+            except Exception as error:
+                print ("Aca tenes la exception gato") #.format(error.getcode()))
     else:
         print("Familia" + str(i) +" no procesada!")
 
