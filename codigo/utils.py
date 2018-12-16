@@ -123,3 +123,20 @@ def calcularExponentes(longitud,factor):
     else:
         exponentes=np.zeros(1)
         return exponentes
+
+def fillstack(downloaded, total):
+    # Leo los que ya descargue
+    descargadas = open(downloaded, "r")
+    flias = descargadas.readlines()
+    flias = list(map(int, flias))
+    descargadas.close()
+
+    stack = []
+
+    for i in range(1, total):
+        if i in flias:
+            print("Familia" + str(i) + " ya descargada!")
+        else:
+            id = 'PF' + '%0*d' % (5, i)
+            stack.append(id)
+    return stack
