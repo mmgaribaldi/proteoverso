@@ -31,14 +31,17 @@ for i in range(2,total_families):
     if i in flias:
         if i not in flias_d:
 
-            id = 'PF' + '%0*d' % (5, i)
+          id = 'PF' + '%0*d' % (5, i)
 
+            # Descargo y muevo al directorio de secuencias
             try:
-                file = fetchPfamMSA(id, compressed=False, gaps=None, format='fasta', timeout=300)
+
+                file = fetchPfamMSA(id, compressed=True, format='fasta', timeout=300)
+
                 shutil.move(file, '../control/' + file)
 
             except Exception as error:
-                print("Aca tenes la exception gato")  # .format(error.getcode()))
+                print ("Aca tenes la exception gato") #.format(error.getcode()))
     else:
         print("Familia" + str(i) +" no procesada!")
 
