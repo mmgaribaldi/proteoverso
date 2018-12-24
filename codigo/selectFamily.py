@@ -16,7 +16,7 @@ with open("../secuencias/Pfam-A.hmm.dat", "r", encoding="utf-8") as file:
 print("Cantidad total de familias del archivo HMM: " + str(total_families))
 
 # Leo los que ya procese
-procesados = open("../secuencias/procesadas.txt", "r")
+procesados = open("../secuencias/henikoff.dat", "r")
 flias = procesados.readlines()
 flias = list(map(int, flias))
 procesados.close()
