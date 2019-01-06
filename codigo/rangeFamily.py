@@ -1,10 +1,10 @@
 import shutil
-import main
+import utils
+import henikoff
 import os
 
 from prody import *
 from matplotlib.pylab import *
-from urllib.error import HTTPError
 
 max_retry = 1
 total_families = 0
@@ -21,14 +21,21 @@ flias = procesados.readlines()
 flias = list(map(int, flias))
 procesados.close()
 
-# Leo los que ya descargue
-descargadas = open("../secuencias/cdhit.dat", "r")
-flias_d = descargadas.readlines()
-flias_d = list(map(int, flias_d))
-descargadas.close()
+# Leo los que ya procese
+procesados = open("../secuencias/ya.dat", "r")
+fliasya = procesados.readlines()
+fliasya = list(map(int, fliasya))
+procesados.close()
+
 
 for i in range(2,total_families):
-    if i in flias_d:
-        if i not in flias:
+    if i in flias:
+        if i not in fliasya:
             id = 'PF' + '%0*d' % (5, i)
-            print(id + "_full.fasta")
+            file = id + "_full.fasta.gz"
+            path = "../../control/"
+            shutil.copy(path + file, '../secuencias/' + file)
+            command = "gzip -d " + '../secuencias/' + file
+            os.system(command)
+            file = file[:-3]
+            henikoff.calcularPesos(file)
