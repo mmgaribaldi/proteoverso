@@ -17,18 +17,20 @@ for line in handle:
     if i == 1:
         largop=st.rstrip()
     if i == 2:
-        secuencias=st.rstrip()
+        secuenciasg=st.rstrip()
     if i == 3:
-        secuenciase=st.rstrip()
+        secuencias=st.rstrip()
     if i == 4:
-        aminoacidos=st.rstrip()
+        secuenciase=st.rstrip()
     if i == 5:
+        aminoacidos=st.rstrip()
+    if i == 6:
         secuenciasp=st.rstrip()
     i = i+1
 
 with open(str(str(sys.argv[1]))+'.csv', 'w') as fp:
 
-    fp.write(idd + "|" + largo + "|" + largop+ "|" + secuencias+ "|" + secuenciase + "|" + aminoacidos + "|" + secuenciasp)
+    fp.write(idd + "|" + largo + "|" + largop + "|" + secuenciasg + "|" + secuencias + "|" + secuenciase + "|" + aminoacidos + "|" + secuenciasp)
 
 
 #print(released);

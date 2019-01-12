@@ -14,12 +14,14 @@ for line in handle:
     if i == 1:
         largop=st.rstrip()
     if i == 2:
-        secuencias=st.rstrip()
+        secuenciasg=st.rstrip()
     if i == 3:
-        secuenciase=st.rstrip()
+        secuencias=st.rstrip()
     if i == 4:
-        aminoacidos=st.rstrip()
+        secuenciase=st.rstrip()
     if i == 5:
+        aminoacidos=st.rstrip()
+    if i == 6:
         secuenciasp=st.rstrip()
     i = i+1
 
@@ -29,6 +31,7 @@ with open(str(str(sys.argv[1]))+'result.json', 'w') as fp:
 	    "id" : str(sys.argv[1]),
 	    "largo" : largo,
 	    "largo procesado" : largop,
+        "secuencias eliminadas" : secuenciasg,
 	    "secuencias" : secuencias,
 	    "secuencias efectivas" : secuenciase,
 	    "aminoacidos posibles" : aminoacidos,
@@ -36,5 +39,4 @@ with open(str(str(sys.argv[1]))+'result.json', 'w') as fp:
 	    }
 	json.dump(released, fp)
 
-#print(released);
 handle.close();

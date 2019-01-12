@@ -90,7 +90,6 @@ def calcularPesos(family):
     results.write("Largo del alineamiento ya procesado: " + str(longitud)+ "\n")
     print("Secuencias eliminadas por ser solo GAPS: " + str(eliminadas))
     results.write("Secuencias eliminadas por ser solo GAPS: " + str(eliminadas) + "\n")
-    cantidadProteinas = len(familia)
 
     # Creo la matriz para calcular los pesos
     pesos = [[0 for x in range(longitud)] for y in range(len(aminoacidos)+1)]
@@ -139,9 +138,9 @@ def calcularPesos(family):
 
     #print("Suma total (control, deberia ser 1): " + str(control))
     #print("El valor de H es: " + str(h))
-    print("Cantidad de secuencias luego de procesar GAPS: " + str(cantidadProteinas-eliminadas))
+    print("Cantidad de secuencias luego de procesar GAPS: " + str(cantidadAlineamientos-eliminadas))
     print("El numero efectivo de secuencias de esta familia es: " + str(int(numeroEfectivo)))
-    results.write("Cantidad de secuencias luego de procesar GAPS: " + str(cantidadProteinas-eliminadas) + "\n")
+    results.write("Cantidad de secuencias luego de procesar GAPS: " + str(cantidadAlineamientos-eliminadas) + "\n")
     results.write("El numero efectivo de secuencias de esta familia es: " + str(int(numeroEfectivo))+ "\n")
 
     ## Calculo el numero efectivo de aminoacidos
