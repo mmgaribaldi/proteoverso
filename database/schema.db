@@ -1,0 +1,26 @@
+CREATE TABLE cdhit (
+ pfam_id TEXT,
+ cutoff REAL NOT NULL,
+ pfam_id_num INTEGER NOT NULL,
+ sequences INTEGER NOT NULL,
+ clusters INTEGER NOT NULL,
+ normalizedClusters REAL NOT NULL,
+ observations text NOT NULL,
+ PRIMARY KEY(pfam_id,cutoff)
+);
+
+CREATE TABLE henikoff (
+ pfam_id TEXT PRIMARY KEY,
+ pfam_id_num INTEGER NOT NULL,
+ alignmentLong INTEGER NOT NULL DEFAULT 0,
+ alignmentLongProcessed INTEGER NOT NULL DEFAULT 0,
+ sequences INTEGER NOT NULL DEFAULT 0,
+ sequencesRemoved INTEGER NOT NULL DEFAULT 0,
+ effectiveSequences INTEGER NOT NULL DEFAULT 0,
+ posibleAA REAL NOT NULL DEFAULT 0,
+ possibleSequences REAL NOT NULL DEFAULT 0,
+ processed BOOLEAN DEFAULT FALSE,
+ checked BOOLEAN DEFAULT FALSE,
+ observations text
+);
+
