@@ -16,7 +16,6 @@ def calcularPesos(family):
 
     # Largo del alineamiento
     longitud = len(familia[0].seq)
-    print("Largo del alineamiento: " + str(longitud))
     results.write("Largo del alineamiento: " + str(longitud)+"\n")
 
 
@@ -38,13 +37,11 @@ def calcularPesos(family):
         proteina.seq = secuenciaNormalizada
 
     cantidadAlineamientos = len(familia)
-    print("Cantidad de secuencias en la familia: " + str(cantidadAlineamientos))
 
     # Array con cantidad de gaps
     import numpy as np
     cantidadGaps = np.zeros(longitud)
 
-    #print("Contando gaps por posicion...")
     for proteina in familia:
         secuencia = proteina.seq
         secuenciaString = str(secuencia)
@@ -85,29 +82,25 @@ def calcularPesos(family):
     familia = familiaSG
 
     # Largo del alineamiento procesado
-    longitud = len(familia[0].seq)
-    print("Largo del alineamiento ya procesado: " + str(longitud))
-    results.write("Largo del alineamiento ya procesado: " + str(longitud)+ "\n")
-    print("Secuencias eliminadas por ser solo GAPS: " + str(eliminadas))
+    longitudp = len(familia[0].seq)
+    results.write("Largo del alineamiento ya procesado: " + str(longitudp) + "\n")
     results.write("Secuencias eliminadas por ser solo GAPS: " + str(eliminadas) + "\n")
 
     # Creo la matriz para calcular los pesos
-    pesos = [[0 for x in range(longitud)] for y in range(len(aminoacidos)+1)]
+    pesos = [[0 for x in range(longitudp)] for y in range(len(aminoacidos)+1)]
 
     # Creo un array para grabar los pesos
     pesosSecuencias = [ 0 for x in range(cantidadAlineamientos)]
 
     # Lleno la matriz
-    #print("Llenando la matriz con fecuencias aminoacidicas...")
     for proteina in familia:
         secuencia = proteina.seq
         secuenciaString = str(secuencia)
-        for x in range(0, longitud):
+        for x in range(0, longitudp):
             if secuenciaString[x] is not '-':
                 pesos[utils.toAminoacido(secuenciaString[x])][x] = pesos[utils.toAminoacido(secuenciaString[x])][x] + 1
             else:
                 pesos[20][x] = pesos[20][x] + 1 # sacar este hardcodeo de 20
-    #print("Matriz completa... Comprobando suma de columnas...")
 
     # Calculo el numero efectivo de secuencias
     control = 0
@@ -118,13 +111,13 @@ def calcularPesos(family):
         total = 0
         secuencia = proteina.seq
         secuenciaString = str(secuencia)
-        for x in range(0, longitud):
+        for x in range(0, longitudp):
             if secuenciaString[x] is not '-':
                 cantidad = pesos[utils.toAminoacido(secuenciaString[x])][x]
                 cantidadDistintos = utils.aminoacidosDistintos(pesos,x,aminoacidos)
                 pesoPosicion = 1/(cantidadDistintos*cantidad)
                 total = total + pesoPosicion
-        totalNormalizado = total/longitud
+        totalNormalizado = total/longitudp
 
         pesosSecuencias[indice] = totalNormalizado
         indice = indice + 1
@@ -136,24 +129,22 @@ def calcularPesos(family):
 
     numeroEfectivo = math.exp(h)
 
-    #print("Suma total (control, deberia ser 1): " + str(control))
-    #print("El valor de H es: " + str(h))
-    print("Cantidad de secuencias luego de procesar GAPS: " + str(cantidadAlineamientos-eliminadas))
-    print("El numero efectivo de secuencias de esta familia es: " + str(int(numeroEfectivo)))
+    # Secuencias sin las que son todos gaps
+    secuenciassg = cantidadAlineamientos-eliminadas
     results.write("Cantidad de secuencias luego de procesar GAPS: " + str(cantidadAlineamientos-eliminadas) + "\n")
     results.write("El numero efectivo de secuencias de esta familia es: " + str(int(numeroEfectivo))+ "\n")
 
     ## Calculo el numero efectivo de aminoacidos
 
     # Vacio la matriz
-    pesos = [[0 for x in range(longitud)] for y in range(len(aminoacidos)+1)]
+    pesos = [[0 for x in range(longitudp)] for y in range(len(aminoacidos)+1)]
 
     # Lleno la matriz con pesos ponderados
     indice = 0
     for proteina in familia:
         secuencia = proteina.seq
         secuenciaString = str(secuencia)
-        for x in range(0, longitud):
+        for x in range(0, longitudp):
             p = secuenciaString[x]
             if secuenciaString[x] is not '-':
                 pesos[utils.toAminoacido(secuenciaString[x])][x] = pesos[utils.toAminoacido(secuenciaString[x])][x] + (pesosSecuencias[indice]*cantidadAlineamientos)
@@ -163,27 +154,27 @@ def calcularPesos(family):
 
     posibles = 1
 
-    for columna in range(0, longitud):
+    for columna in range(0, longitudp):
         hj=0
         for fila in range(0, 21):
             pj = pesos[fila][columna]/cantidadAlineamientos
             if pj != 0:
                 hj = hj + (-1)*pj*math.log(pj)
         aaj = math.exp(hj)
-        #print("En la posicion " + str(columna) + " hay " + str(aaj) + " aminoacidos representativos")
 
         posibles = posibles + math.log(aaj,10)
 
-    print("Logaritmo de secuencias posibles segun alineamiento: " + str(posibles))
     results.write("Logaritmo de secuencias posibles segun alineamiento: " + str(posibles)+ "\n")
 
-    exponentes = utils.calcularExponentes(longitud,10)
+    exponentes = utils.calcularExponentes(longitudp,10)
     secuenciasPosibles = 1
     for exponente in exponentes:
         secuenciasPosibles = secuenciasPosibles+math.log(math.pow(21,exponente),10)
 
-    print("Logaritmo de secuencias posibles segun longitud: " + str(secuenciasPosibles))
     results.write("Logaritmo de secuencias posibles segun longitud: " + str(secuenciasPosibles)+ "\n")
 
     # Cierro el archivo con resultados
     results.close()
+
+    family = family[14:21]
+    return str(family) + "|" + str(longitud) + "|" + str(longitudp) + "|" + str(secuenciassg) + "|" + str(eliminadas) + "|" + str(int(numeroEfectivo)) + "|" + str(posibles) + "|" + str(secuenciasPosibles)

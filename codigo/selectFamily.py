@@ -1,5 +1,4 @@
 import shutil
-import main
 import os
 
 from prody import *

@@ -1,8 +1,9 @@
 import shutil
 import os
-
+import math
 from prody import *
-from matplotlib.pylab import *
+
+##  Definiciones de funciones
 
 
 def download(mode, path, total):
@@ -47,7 +48,6 @@ def download(mode, path, total):
         except Exception as error:
             print("Aca tenes la exception gato")  # .format(error.getcode()))
 
-##  Definiciones de funciones
 
 # Serializar aminoacidos
 def toAminoacido(x):
@@ -73,6 +73,7 @@ def toAminoacido(x):
         'Y': 18,
         'V': 19,
     }[x]
+
 
 # Des-Serializar(?) aminoacidos
 def fromAminoacido(c):
@@ -100,6 +101,7 @@ def fromAminoacido(c):
         20: '-',
     }[c]
 
+
 # Aminoacidos distintos por posicion del alineamiento
 def aminoacidosDistintos(pesos, posicion, aminoacidos):
     cantidad = 0
@@ -107,6 +109,7 @@ def aminoacidosDistintos(pesos, posicion, aminoacidos):
         if pesos[x][posicion] is not 0:
             cantidad = cantidad + 1
     return cantidad
+
 
 def calcularExponentes(longitud,factor):
     import numpy as np
@@ -123,3 +126,15 @@ def calcularExponentes(longitud,factor):
         exponentes=np.zeros(1)
         return exponentes
 
+
+def checkFamily(values,db):
+    if values[0] == db[0]:
+        if str(values[1]) == str(db[2]):
+            if str(values[2]) == str(db[3]):
+                if str(values[3]) == str(db[4]):
+                    if str(values[4]) == str(db[5]):
+                        if str(values[5]) == str(db[6]):
+                            if str(values[6]) == str(db[7]):
+                                if str(values[7]) == str(db[8]):
+                                    return True
+    return False
