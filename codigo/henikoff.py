@@ -11,13 +11,8 @@ def calcularPesos(family):
     # Lectura de la familia
     familia = list(SeqIO.parse("../secuencias/" + family, "fasta"))
 
-    # Abro el archivo para resultados
-    results = open("../secuencias/"+family+"_results.txt","w")
-
     # Largo del alineamiento
     longitud = len(familia[0].seq)
-    results.write("Largo del alineamiento: " + str(longitud)+"\n")
-
 
     #print("Normalizando secuencia...")
     for proteina in familia:
@@ -73,18 +68,11 @@ def calcularPesos(family):
         else:
             eliminadas = eliminadas + 1
 
-    # Handler para la escritura
-    handle = open("../secuencias/"+family+"_no_gaps.fasta","w")
-
-    # Escritura
-    SeqIO.write(familiaSG, handle, "fasta")
-
+    # Comienzo a utilizar la familia sin GAPS
     familia = familiaSG
 
     # Largo del alineamiento procesado
     longitudp = len(familia[0].seq)
-    results.write("Largo del alineamiento ya procesado: " + str(longitudp) + "\n")
-    results.write("Secuencias eliminadas por ser solo GAPS: " + str(eliminadas) + "\n")
 
     # Creo la matriz para calcular los pesos
     pesos = [[0 for x in range(longitudp)] for y in range(len(aminoacidos)+1)]
@@ -131,8 +119,6 @@ def calcularPesos(family):
 
     # Secuencias sin las que son todos gaps
     secuenciassg = cantidadAlineamientos-eliminadas
-    results.write("Cantidad de secuencias luego de procesar GAPS: " + str(cantidadAlineamientos-eliminadas) + "\n")
-    results.write("El numero efectivo de secuencias de esta familia es: " + str(int(numeroEfectivo))+ "\n")
 
     ## Calculo el numero efectivo de aminoacidos
 
@@ -164,17 +150,11 @@ def calcularPesos(family):
 
         posibles = posibles + math.log(aaj,10)
 
-    results.write("Logaritmo de secuencias posibles segun alineamiento: " + str(posibles)+ "\n")
 
     exponentes = utils.calcularExponentes(longitudp,10)
     secuenciasPosibles = 1
     for exponente in exponentes:
         secuenciasPosibles = secuenciasPosibles+math.log(math.pow(21,exponente),10)
-
-    results.write("Logaritmo de secuencias posibles segun longitud: " + str(secuenciasPosibles)+ "\n")
-
-    # Cierro el archivo con resultados
-    results.close()
 
     family = family[14:21]
     return str(family) + "|" + str(longitud) + "|" + str(longitudp) + "|" + str(secuenciassg) + "|" + str(eliminadas) + "|" + str(int(numeroEfectivo)) + "|" + str(posibles) + "|" + str(secuenciasPosibles)
