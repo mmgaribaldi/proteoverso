@@ -3,10 +3,12 @@ from Bio.Seq import Seq
 import math
 import utils
 
-def calcularPesos(family):
+AMINOACIDOS = "ARNDCEQGHILKMFPSTWYV"
+GAP_POS = 20
+GAP_RATE = 0.50
 
-    # Aminoacidos
-    aminoacidos = "ARNDCEQGHILKMFPSTWYV" # FIXME -sacar a archivo-
+
+def calcularPesos(family):
 
     # Lectura de la familia
     familia = list(SeqIO.parse("../secuencias/" + family, "fasta"))
@@ -21,11 +23,11 @@ def calcularPesos(family):
         secuenciaString = secuenciaString.replace('.', '-')
         secuenciaString = secuenciaString.upper()
 
-        # Reemplazo todo lo que no es aminoacido por A
+        # Reemplazo lo que no es aminoacido por A
         for x in range(0, longitud):
             if secuenciaString[x] is not '-':
-                if secuenciaString[x] not in aminoacidos:
-                    secuenciaString = secuenciaString.replace(secuenciaString[x] , 'A')
+                if secuenciaString[x] not in AMINOACIDOS:
+                    secuenciaString = secuenciaString.replace(secuenciaString[x], 'A')
 
 
         secuenciaNormalizada = Seq(secuenciaString)
@@ -55,7 +57,7 @@ def calcularPesos(family):
         secuenciaString = str(secuencia)
         secuenciaLista = list(secuenciaString)
         for j in range(0,longitud):
-            if ( (cantidadGaps[j]/cantidadAlineamientos) > 0.50 ): #FIXME -sacar como variable el porcentaje-
+            if cantidadGaps[j]/cantidadAlineamientos > GAP_RATE :
                 secuenciaLista[j]='0'
         secuenciaString = "".join(secuenciaLista)
         secuenciaString = secuenciaString.replace('0','')
@@ -75,7 +77,7 @@ def calcularPesos(family):
     longitudp = len(familia[0].seq)
 
     # Creo la matriz para calcular los pesos
-    pesos = [[0 for x in range(longitudp)] for y in range(len(aminoacidos)+1)]
+    pesos = [[0 for x in range(longitudp)] for y in range(len(AMINOACIDOS)+1)]
 
     # Creo un array para grabar los pesos
     pesosSecuencias = [ 0 for x in range(cantidadAlineamientos)]
@@ -86,9 +88,10 @@ def calcularPesos(family):
         secuenciaString = str(secuencia)
         for x in range(0, longitudp):
             if secuenciaString[x] is not '-':
-                pesos[utils.toAminoacido(secuenciaString[x])][x] = pesos[utils.toAminoacido(secuenciaString[x])][x] + 1
+                pesos[utils.toAminoacido(secuenciaString[x])][x] = \
+                pesos[utils.toAminoacido(secuenciaString[x])][x] + 1
             else:
-                pesos[20][x] = pesos[20][x] + 1 # sacar este hardcodeo de 20
+                pesos[GAP_POS][x] = pesos[GAP_POS][x] + 1
 
     # Calculo el numero efectivo de secuencias
     control = 0
@@ -102,7 +105,7 @@ def calcularPesos(family):
         for x in range(0, longitudp):
             if secuenciaString[x] is not '-':
                 cantidad = pesos[utils.toAminoacido(secuenciaString[x])][x]
-                cantidadDistintos = utils.aminoacidosDistintos(pesos,x,aminoacidos)
+                cantidadDistintos = utils.aminoacidosDistintos(pesos, x, AMINOACIDOS)
                 pesoPosicion = 1/(cantidadDistintos*cantidad)
                 total = total + pesoPosicion
         totalNormalizado = total/longitudp
@@ -123,7 +126,7 @@ def calcularPesos(family):
     ## Calculo el numero efectivo de aminoacidos
 
     # Vacio la matriz
-    pesos = [[0 for x in range(longitudp)] for y in range(len(aminoacidos)+1)]
+    pesos = [[0 for x in range(longitudp)] for y in range(len(AMINOACIDOS)+1)]
 
     # Lleno la matriz con pesos ponderados
     indice = 0
@@ -133,9 +136,11 @@ def calcularPesos(family):
         for x in range(0, longitudp):
             p = secuenciaString[x]
             if secuenciaString[x] is not '-':
-                pesos[utils.toAminoacido(secuenciaString[x])][x] = pesos[utils.toAminoacido(secuenciaString[x])][x] + (pesosSecuencias[indice]*cantidadAlineamientos)
+                pesos[utils.toAminoacido(secuenciaString[x])][x] = \
+                pesos[utils.toAminoacido(secuenciaString[x])][x] + \
+                (pesosSecuencias[indice]*cantidadAlineamientos)
             else:
-                pesos[20][x] = pesos[20][x] + (pesosSecuencias[indice]*cantidadAlineamientos) # sacar este hardcodeo de 20
+                pesos[GAP_POS][x] = pesos[GAP_POS][x] + (pesosSecuencias[indice]*cantidadAlineamientos)
         indice = indice + 1
 
     posibles = 1
@@ -157,4 +162,6 @@ def calcularPesos(family):
         secuenciasPosibles = secuenciasPosibles+math.log(math.pow(21,exponente),10)
 
     family = family[14:21]
-    return str(family) + "|" + str(longitud) + "|" + str(longitudp) + "|" + str(secuenciassg) + "|" + str(eliminadas) + "|" + str(int(numeroEfectivo)) + "|" + str(posibles) + "|" + str(secuenciasPosibles)
+    return str(family) + "|" + str(longitud) + "|" + str(longitudp) + "|" + str(secuenciassg) + "|" + \
+           str(eliminadas) + "|" + str(int(numeroEfectivo)) + "|" + str(posibles) + \
+           "|" + str(secuenciasPosibles)
