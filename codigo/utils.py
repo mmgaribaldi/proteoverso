@@ -3,50 +3,34 @@ import os
 import math
 from prody import *
 
-##  Definiciones de funciones
+# Definiciones de funciones
 
 
 def download(mode, path, total):
 
     if mode == 1:
-        # Leo los que ya procese
-        procesados = open(path, "r")
-        flias = procesados.readlines()
-        flias = list(map(int, flias))
-        procesados.close()
-
         for i in range(2, total):
-            if i in flias:
-                print("Familia" + str(i) +" ya procesada!")
-            else:
-
-                id = 'PF' + '%0*d' % (5, i)
-
-                # Descargo y muevo al directorio de secuencias
-                try:
-                    file = fetchPfamMSA(id, compressed=True, format='fasta', timeout=300)
-
-                    shutil.copy(file, '../control/' + file)
-
-                    command = "gzip -d " + file
-                    os.system(command)
-                    file = file[:-3]
-                    shutil.move(file, '../secuencias/' + file)
-
-                except Exception as error:
-                    print ("Aca tenes la exception gato") #.format(error.getcode()))
+            id = 'PF' + '%0*d' % (5, i)
+            # Descargo y muevo al directorio de secuencias
+            try:
+                file = fetchPfamMSA(id, compressed=True, format='fasta', timeout=300)
+                shutil.copy(file, '../control/' + file)
+                command = "gzip -d " + file
+                os.system(command)
+                file = file[:-3]
+                shutil.move(file, '../secuencias/' + file)
+            except Exception as error:
+                print ("No se pudo descargar!")
     if mode == 2:
         try:
-
             file = fetchPfamMSA(path, compressed=True, format='fasta', timeout=300)
             shutil.copy(file, '../control/' + file)
             command = "gzip -d " + file
             os.system(command)
             file = file[:-3]
             shutil.move(file, '../secuencias/' + file)
-
         except Exception as error:
-            print("Aca tenes la exception gato")  # .format(error.getcode()))
+            print("No se pudo descargar!")
 
 
 # Serializar aminoacidos
@@ -75,7 +59,7 @@ def toAminoacido(x):
     }[x]
 
 
-# Des-Serializar(?) aminoacidos
+# Des-Serializar aminoacidos
 def fromAminoacido(c):
     return {
         0: 'A',

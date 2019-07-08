@@ -4,7 +4,6 @@ import utils
 import os
 
 conn = sqlite3.connect('../database/proteoverso.db')
-
 c = conn.cursor()
 
 # Selecciono los que no estan chequeados
