@@ -2,7 +2,18 @@ import sqlite3
 
 
 def toFila(r):
-    linea = str(r[0][0]) + "," + str(r[0][3]) + "," + str(r[1][3]) + "," + str(r[2][3]) + "," + str(r[3][3]) + "," + str(r[4][3]) + "," + str(r[5][3]) + "," + str(r[6][3]) + "," + str(r[7][3]) + "," + str(r[8][3]) + "," + str(r[9][3]) + "," + str(r[10][3]) + "," + str(r[11][3])
+    linea = str(r[0][0]) + "," + str(r[0][2]) + "," + str(r[0][3]) + "," \
+            + str(r[1][2]) + "," + str(r[1][3]) + "," \
+            + str(r[2][2]) + "," + str(r[2][3]) + "," \
+            + str(r[3][2]) + "," + str(r[3][3]) + "," \
+            + str(r[4][2]) + "," + str(r[4][3]) + "," \
+            + str(r[5][2]) + "," + str(r[5][3]) + "," \
+            + str(r[6][2]) + "," + str(r[6][3]) + "," \
+            + str(r[7][2]) + "," + str(r[7][3]) + "," \
+            + str(r[8][2]) + "," + str(r[8][3]) + "," \
+            + str(r[9][2]) + "," + str(r[9][3]) + "," \
+            + str(r[10][2]) + "," + str(r[10][3]) + "," \
+            + str(r[11][2]) + "," + str(r[11][3])
     return linea
 
 # Abro archivos para exportar
@@ -14,7 +25,7 @@ c = conn.cursor()
 
 
 # Selecciono los que no estan chequeados
-c.execute('''SELECT DISTINCT pfam_id FROM cdhit ;''')
+c.execute('''SELECT DISTINCT pfam_id FROM henikoff where sequences >= 20;''')
 rows = c.fetchall()
 
 for row in rows:
