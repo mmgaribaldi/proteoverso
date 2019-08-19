@@ -1,6 +1,7 @@
 import shutil
 import os
 import math
+import sqlite3
 from prody import *
 
 # Definiciones de funciones
@@ -122,3 +123,28 @@ def checkFamily(values,db):
                                 if str(values[7]) == str(db[8]):
                                     return True
     return False
+
+
+def export(campo,condicion):
+    # Abro el archivo para resultados
+    results = open("../database/export.txt", "w")
+
+    conn = sqlite3.connect('../database/proteoverso.db')
+
+    c = conn.cursor()
+
+    # armo la query
+    query = "select * from henikoff where " + campo + " " + condicion + ";"
+
+    # Selecciono los que no estan chequeados
+    c.execute(query)
+    rows = c.fetchall()
+
+    for row in rows:
+        results.write(str(row) + '\n')
+
+    # Cierro el archivo
+    results.close()
+
+    # Cierro la conexion
+    conn.close()
